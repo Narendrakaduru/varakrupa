@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>.::Jewellary::.</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="css/menu.css">
+  <link rel="stylesheet" type="text/css" href="css/flex-slider.css">
+  <link rel="stylesheet" type="text/css" href="css/slider.css">
+  <link rel="stylesheet" type="text/css" href="source/jquery.fancybox.css?v=2.1.5" media="screen" />
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css">
+  <link rel="icon" href="images/ring.png">
+  <script type="text/javascript" src="lib/jquery-1.10.2.min.js"></script>
+
+  <!-- Add mousewheel plugin (this is optional) -->
+  <script type="text/javascript" src="lib/jquery.mousewheel.pack.js?v=3.1.3"></script>
+
+  <!-- Add fancyBox main JS and CSS files -->
+  <script type="text/javascript" src="source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  <link rel="stylesheet" type="text/css" href="source/jquery.fancybox.css?v=2.1.5" media="screen" />
+
+  <!-- Add Button helper (this is optional) -->
+  <link rel="stylesheet" type="text/css" href="source/helpers/jquery.fancybox-buttons.css?v=1.0.5" />
+  <script type="text/javascript" src="source/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+
+  <!-- Add Thumbnail helper (this is optional) -->
+  <link rel="stylesheet" type="text/css" href="source/helpers/jquery.fancybox-thumbs.css?v=1.0.7" />
+  
+  <script type="text/javascript">
+    $(document).ready(function() {
+      /*
+       *  Simple image gallery. Uses default settings
+       */
+
+      $('.fancybox').fancybox();
+
+      /*
+       *  Different effects
+       */
+
+      // Change title type, overlay closing speed
+      $(".fancybox-effects-a").fancybox({
+        helpers: {
+          title : {
+            type : 'outside'
+          },
+          overlay : {
+            speedOut : 0
+          }
+        }
+      });
+
+      // Disable opening and closing animations, change title type
+      $(".fancybox-effects-b").fancybox({
+        openEffect  : 'none',
+        closeEffect : 'none',
+
+        helpers : {
+          title : {
+            type : 'over'
+          }
+        }
+      });
+
+      // Set custom style, close if clicked, change title type and overlay color
+      $(".fancybox-effects-c").fancybox({
+        wrapCSS    : 'fancybox-custom',
+        closeClick : true,
+
+        openEffect : 'none',
+
+        helpers : {
+          title : {
+            type : 'inside'
+          },
+          overlay : {
+            css : {
+              'background' : 'rgba(238,238,238,0.85)'
+            }
+          }
+        }
+      });
+
+      // Remove padding, set opening and closing animations, close if clicked and disable overlay
+      $(".fancybox-effects-d").fancybox({
+        padding: 0,
+
+        openEffect : 'elastic',
+        openSpeed  : 150,
+
+        closeEffect : 'elastic',
+        closeSpeed  : 150,
+
+        closeClick : true,
+
+        helpers : {
+          overlay : null
+        }
+      });
+
+      /*
+       *  Button helper. Disable animations, hide close button, change title type and content
+       */
+
+      $('.fancybox-buttons').fancybox({
+        openEffect  : 'none',
+        closeEffect : 'none',
+
+        prevEffect : 'none',
+        nextEffect : 'none',
+
+        closeBtn  : false,
+
+        helpers : {
+          title : {
+            type : 'inside'
+          },
+          buttons : {}
+        },
+
+        afterLoad : function() {
+          this.title = 'Image ' + (this.index + 1) + ' of ' + this.group.length + (this.title ? ' - ' + this.title : '');
+        }
+      });
+
+
+      /*
+       *  Thumbnail helper. Disable animations, hide close button, arrows and slide to next gallery item if clicked
+       */
+
+      $('.fancybox-thumbs').fancybox({
+        prevEffect : 'none',
+        nextEffect : 'none',
+
+        closeBtn  : false,
+        arrows    : false,
+        nextClick : true,
+
+        helpers : {
+          thumbs : {
+            width  : 50,
+            height : 50
+          }
+        }
+      });
+
+      /*
+       *  Media helper. Group items, disable animations, hide arrows, enable media and button helpers.
+      */
+      $('.fancybox-media')
+        .attr('rel', 'media-gallery')
+        .fancybox({
+          openEffect : 'none',
+          closeEffect : 'none',
+          prevEffect : 'none',
+          nextEffect : 'none',
+
+          arrows : false,
+          helpers : {
+            media : {},
+            buttons : {}
+          }
+        });
+
+      /*
+       *  Open manually
+       */
+
+      $("#fancybox-manual-a").click(function() {
+        $.fancybox.open('1_b.jpg');
+      });
+
+      $("#fancybox-manual-b").click(function() {
+        $.fancybox.open({
+          href : 'iframe.html',
+          type : 'iframe',
+          padding : 5
+        });
+      });
+
+      $("#fancybox-manual-c").click(function() {
+        $.fancybox.open([
+          {
+            href : '1_b.jpg',
+            title : 'My title'
+          }, {
+            href : '2_b.jpg',
+            title : '2nd title'
+          }, {
+            href : '3_b.jpg'
+          }
+        ], {
+          helpers : {
+            thumbs : {
+              width: 75,
+              height: 50
+            }
+          }
+        });
+      });
+
+
+    });
+  </script>
+  <style type="text/css">
+    .fancybox-custom .fancybox-skin {
+      box-shadow: 0 0 50px #222;
+    }
+  </style>
+</head>
+<body style="background: linear-gradient(#efefef, #ffffff);background: -webkit-linear-gradient(#efefef, #ffffff);background: -moz-linear-gradient(#efefef, #ffffff);">
+
+  <div class="container-fluid" style="padding:0px">
+    <div class="top-bar"></div>
+  </div>
+
+  <div class="container">
+      <div class="logo">
+        <img src="images/varakrupa.png" class="img-responsive">
+      </div>
+
+      <div id='cssmenu'>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="craft.html">Craftsmanship</a></li>
+          <li><a href="collection.html">Collection</a></li>
+          <li><a href="upcoming.html">Up Coming Events</a></li>
+          <li><a href="contact.html">Contacts</a></li>
+        </ul>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 col-xs-12">
+          <div class="flexslider left">
+              <ul class="slides">
+                <li>
+                  <img src="images/slide-1.jpg">
+                  <div class="meta">
+                    <h1>Lorem ipsum dolor sit amet, consectetur.</h1>
+                    <h2>Lorem ipsum dolor sit.</h2>
+                    <div class="category">
+                      <p>$286600</p>
+                      <span>Category</span>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <img src="images/slide-2.jpg">
+                  <div class="meta">
+                    <h1>Lorem ipsum dolor sit amet, consectetur.</h1>
+                    <h2>Lorem ipsum dolor sit.</h2>
+                    <div class="category">
+                      <p>$415000</p>
+                      <span>Category</span>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <img src="images/slide-3.jpg">
+                  <div class="meta">
+                    <h1>Lorem ipsum dolor sit amet, consectetur.</h1>
+                    <h2>Lorem ipsum dolor sit.</h2>
+                    <div class="category">
+                      <p>$415000</p>
+                      <span>Category</span>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <img src="images/slide-4.jpg">
+                  <div class="meta">
+                    <h1>Lorem ipsum dolor sit amet, consectetur.</h1>
+                    <h2>Lorem ipsum dolor sit.</h2>
+                    <div class="category">
+                      <p>$415000</p>
+                      <span>Category</span>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+        </div>
+        <div class="col-md-6 col-xs-12">
+          <div class="row">
+            <div class="col-sm-6 col-xs-12" style="margin-bottom:20px;">
+              <article class="icon-box responsive-centered">
+                <div class="box-top">
+                  <div class="box-icon"></div>
+                    <div class="box-header">
+                      <img src="images/ring.png" class="img-responsive">
+                    </div>
+                  </div>
+                <div class="divider"></div>
+                <div class="box-body">
+                    <h5><a href="#">Rings</a></h5>
+                    <p>collection</p>
+                </div>
+              </article>
+            </div>
+            <div class="col-sm-6 col-xs-12">
+              <article class="icon-box responsive-centered">
+                <div class="box-top">
+                  <div class="box-icon"></div>
+                    <div class="box-header">
+                      <img src="images/earring.jpg" class="img-responsive">
+                    </div>
+                  </div>
+                <div class="divider"></div>
+                <div class="box-body">
+                    <h5><a href="#">EARRINGS</a></h5>
+                    <p>collection</p>
+                </div>
+              </article>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6 col-xs-12">
+              <article class="icon-box responsive-centered">
+                <div class="box-top">
+                  <div class="box-icon"></div>
+                    <div class="box-header">
+                      <img src="images/bracelight.jpg" class="img-responsive">
+                    </div>
+                  </div>
+                <div class="divider"></div>
+                <div class="box-body">
+                   <h5><a href="#">BRACELETS</a></h5>
+                    <p>collection</p>
+                </div>
+              </article>
+            </div>
+            <div class="col-sm-6 col-xs-12">
+              <article class="icon-box responsive-centered">
+                <div class="box-top">
+                  <div class="box-icon"></div>
+                    <div class="box-header">
+                      <img src="images/neclaces.jpg" class="img-responsive">
+                    </div>
+                  </div>
+                <div class="divider"></div>
+                <div class="box-body">
+                    <h5><a href="#">NECKLACES</a></h5>
+                    <p>collection</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+      	<div class="col-md-8">
+      		<div class="few">
+	            <h3>A Few Words About Us</h3>
+	            <div >
+	              <img src="images/page-2_img-1.jpg" class="img-responsive abt">
+	              <p class="heading">Passion for design started as a child, as the entire family is into the business of Jewellery from three generations.</p>
+	              <p>Varakrupa designs 22 carat pure gold design and mainly focused and specialised into hand crafted antique jewellery for anyone who's passed through fire to wear as an emblem of triumph. Our work is a tribute to our heritage, to perseverance and to the spirit of triumph in you.</p>
+	              <p>We continually develop our jewellery portfolio in keeping with our core values of affordable luxury, contemporary design and personal storytelling.</p>
+	              <p>We are the manufacturers and wholesalers where we focus more on B2B markets to satisfy the customer needs. We have ample customers across the globe.</p>
+	            </div>
+	        </div>
+      	</div>
+      	<div class="col-md-4">
+      		<div class="few">
+      			<h3>A little about me!</h3>
+	            <div>
+	              <p>Hi!  We are glad that you came by for a visit.  We hope you enjoy reading the little stories and photos we share about creating jewellery. We been making jewellery for 3 generation for now, and have found that it’s a fun-filled road to happiness. When we can sneak a spare moment, We’re off creating jewellery.</p>
+	            </div>
+      		</div>
+      	</div>
+      </div>
+
+
+      <div class="row" style="margin-bottom:30px;">
+        <div class="col-md-8 col-xs-12">
+          <div class="few">
+            <h3 style="color:#ca9640;">Mission</h3>
+            <p>Our mission is to celebrate women by offering them the opportunity for personal expression through our universe of high quality and contemporary jewellery at affordable prices.</p>
+          </div>
+        </div>
+        <div class="col-md-4 col-xs-12">
+          <div class="few">
+            <h3 style="color:#ca9640;">Vision</h3>
+            <p>Our Vision is to become the world’s most loved jewellery brand.</p>
+          </div>
+        </div>
+      </div>
+
+  </div>
+
+      <footer>
+        <div class="footerbig">
+            <div class="row">
+                <div class="col-md-7">
+                <h4>About</h4>
+                    <p>Passion for design started as a child, as the entire family is into the business of Jewellery from three generations.
+                    Varakrupa designs 22 carat pure gold design and mainly focused and specialised into hand crafted antique jewellery for anyone who's passed through fire to wear as an emblem of triumph. Our work is a tribute to our heritage, to perseverance and to the spirit of triumph in you.</p>
+                </div>
+                <div class="col-md-2">
+                    <h4 style="margin-left: -5px;">Menu</h4>
+                    <ul class="fotmenu">
+                        <li><a href="home.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="style.html">Style</a></li>
+                        <li><a href="collection.html">Collection</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h4 style="margin-left: -15px;">Social links</h4>
+                    <div class="row m-t-20 m-lr-0">
+                        <div class="icon">
+                            <a href="https://www.facebook.com/VarakrupaJewellers"><i class="fa fa-facebook"></i></a>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-twitter"></i>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-google-plus"></i>
+                        </div>
+                    </div>
+                    <div class="row m-t-20 m-lr-0">
+                        <div class="icon">
+                            <i class="fa fa-linkedin"></i>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-instagram"></i>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-pinterest"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footersmall">
+        <p>© Copyright 2017 Varakrupa Jewellers. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/menu.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+    <script type="text/javascript" src="js/flex-slider.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+    <script type="text/javascript" src="source/jquery.fancybox.pack.js?v=2.1.5"></script>
+    <script type="text/javascript">
+      $('.flexslider').flexslider({
+          animation: "slide",
+          controlNav: false
+        });
+      $(document).ready(function () {
+          $('ul > li > a > .thumbnail').imgZoom();
+        });
+      $(document).ready(function() {
+
+      /* This is basic - uses default settings */
+      
+      $("a#single_image").fancybox();
+      
+      /* Using custom settings */
+      
+      $("a#inline").fancybox({
+        'hideOnContentClick': true
+      });
+
+      /* Apply fancybox to multiple items */
+      
+      $("a.group").fancybox({
+        'transitionIn'  : 'elastic',
+        'transitionOut' : 'elastic',
+        'speedIn'   : 600, 
+        'speedOut'    : 200, 
+        'overlayShow' : false
+      });
+      
+    });
+    </script>
+
+
+
+</body>
+</html>
